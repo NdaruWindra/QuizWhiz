@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap");
+
+:root {
+  /* Variabel Warna */
+  --primary-blue: #1cb0f6;
+  --light-blue: #dcf2ff;
+  --dark-blue: #1899e6;
+  --orange: #ff8a00;
+  --dark-orange: #e67d00;
+  --grey-border: #e5e5e5;
+  --dark-grey: #4b4b4b;
+  --green-correct: #58cc02;
+  --green-dark: #51b800;
+  --red-wrong: #ff4b4b;
+  --red-dark: #e64040;
+}
+
+body {
+  font-family: "Fredoka", sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+  color: var(--dark-grey);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.quiz-container {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  width: 100%;
+  max-width: 600px; 
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px; 
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--dark-grey);
+  padding: 0;
+  margin-right: 10px;
+}
+
+.progress-bar-container {
+  flex-grow: 1; 
+  background-color: var(--grey-border);
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%; 
+  height: 100%;
+  background-color: var(--primary-blue);
+  border-radius: 5px;
+  transition: width 0.3s ease-in-out; 
+}
+/* End Header */
+
+/* Karakter Duo dan Speech Bubble */
+.duo-character {
+  display: flex;
+  align-items: flex-end; 
+  margin-bottom: 25px;
+}
+
+.duo-img {
+  width: 80px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.speech-bubble {
+  background-color: #fff;
+  border: 2px solid var(--grey-border);
+  border-radius: 15px;
+  padding: 10px 15px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Panah speech bubble */
+.speech-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-right: 10px solid var(--grey-border); 
+  border-bottom: 10px solid transparent;
+}
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: -8px; 
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-right: 10px solid #fff; 
+  border-bottom: 10px solid transparent;
+}
+
+#speech-text {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+/* Area Pertanyaan */
+#question-text {
+  font-size: 1.8em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Opsi Jawaban */
+.options-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+  margin-bottom: 30px;
+}
+
+.option-button {
+  background-color: #fff;
+  border: 2px solid var(--grey-border);
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 1.2em;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  color: var(--dark-grey);
+}
+
+.option-button:hover:not(.selected):not(.correct):not(.wrong) {
+  background-color: var(--light-blue);
+  border-color: var(--primary-blue);
+}
+
+/* Gaya saat opsi dipilih */
+.option-button.selected {
+  background-color: var(--light-blue);
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+/* Gaya untuk jawaban benar */
+.option-button.correct {
+  background-color: var(--green-correct);
+  border-color: var(--green-dark);
+  color: white;
+}
+
+/* Gaya untuk jawaban salah */
+.option-button.wrong {
+  background-color: var(--red-wrong);
+  border-color: var(--red-dark);
+  color: white;
+}
+
+/* Tombol Lanjutkan */
+.continue-button {
+  background-color: var(--orange);
+  color: white;
+  font-size: 1.4em;
+  font-weight: 700;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.continue-button:hover:not(:disabled) {
+  background-color: var(--dark-orange);
+}
+
+.continue-button:disabled {
+  background-color: var(--grey-border);
+  cursor: not-allowed;
+  color: #a0a0a0;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .quiz-container {
+    padding: 20px;
+  }
+  #question-text {
+    font-size: 1.5em;
+  }
+  .option-button {
+    font-size: 1.1em;
+    padding: 12px 15px;
+  }
+  .continue-button {
+    font-size: 1.2em;
+    padding: 12px 25px;
+  }
+}
