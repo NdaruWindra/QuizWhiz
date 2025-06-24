@@ -167,28 +167,28 @@ body {
   border-color: var(--primary-blue);
 }
 
-/* Gaya saat opsi dipilih */
+/* Style saat opsi dipilih */
 .option-button.selected {
   background-color: var(--light-blue);
   border-color: var(--primary-blue);
   color: var(--primary-blue);
 }
 
-/* Gaya untuk jawaban benar */
+/* Style untuk jawaban benar */
 .option-button.correct {
   background-color: var(--green-correct);
   border-color: var(--green-dark);
   color: white;
 }
 
-/* Gaya untuk jawaban salah */
+/* Style untuk jawaban salah */
 .option-button.wrong {
   background-color: var(--red-wrong);
   border-color: var(--red-dark);
   color: white;
 }
 
-/* Tombol Lanjutkan */
+/* Button Continue */
 .continue-button {
   background-color: var(--orange);
   color: white;
@@ -213,20 +213,3 @@ body {
   color: #a0a0a0;
 }
 
-/* Responsif */
-@media (max-width: 768px) {
-  .quiz-container {
-    padding: 20px;
-  }
-  #question-text {
-    font-size: 1.5em;
-  }
-  .option-button {
-    font-size: 1.1em;
-    padding: 12px 15px;
-  }
-  .continue-button {
-    font-size: 1.2em;
-    padding: 12px 25px;
-  }
-}
