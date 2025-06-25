@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     quitButton.style.marginTop = "0";
 
     quitButton.onclick = () => {
-      window.location.href = "/index.html";
+      window.location.href = "/menu.html";
     };
     resultButtonsContainer.appendChild(quitButton);
 
