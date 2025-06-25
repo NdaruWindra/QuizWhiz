@@ -1,32 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let currentQuestionsIndex = 0;
+  let currentQuestionIndex = 0;
   let selectedOption = null;
-  let inAnswered = false;
+  let isAnswered = false;
   let score = 0;
+  const autoAdvanceDelay = 2000;
 
   const questionTextElement = document.getElementById("question-text");
   const optionsContainer = document.getElementById("options-container");
   const continueButton = document.getElementById("continue-button");
-  const progressBar = document.getElementById(".progress-bar");
+  const progressBar = document.querySelector(".progress-bar");
   const speechTextElement = document.getElementById("speech-text");
 
-  function displayQuestions() {
-    if (currentQuestionsIndex >= questions.length) {
+  function displayQuestion() {
+    if (currentQuestionIndex >= questions.length) {
       displayResults();
       return;
     }
 
-    const currentQuestions = questions[currentQuestionsIndex];
+    const currentQuestion = questions[currentQuestionIndex];
 
-    optionsContainer.innerHTML = " ";
+    optionsContainer.innerHTML = "";
     selectedOption = null;
     isAnswered = false;
     continueButton.disabled = true;
-    speechTextElement.textContent = currentQuestions.speech;
+    continueButton.textContent = "CONTINUE";
+    continueButton.style.display = "block";
+    speechTextElement.textContent = currentQuestion.speech;
 
-    questionTextElement.textContent = currentQuestions.question;
+    questionTextElement.textContent = currentQuestion.question;
 
-    currentQuestions.options.forEach((option) => {
+    currentQuestion.options.forEach((option) => {
       const button = document.createElement("button");
       button.classList.add("option-button");
       button.textContent = option;
@@ -34,11 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       button.addEventListener("click", () => {
         if (!isAnswered) {
-          selectedOption(button);
+          selectOption(button);
         }
       });
       optionsContainer.appendChild(button);
     });
+
     updateProgressBar();
   }
 
@@ -56,19 +60,109 @@ document.addEventListener("DOMContentLoaded", () => {
     isAnswered = true;
     continueButton.disabled = false;
 
-    const currentQuestions = questions[currentQuestionsIndex];
-    const optionsButtons = document.querySelectorAll(".option-button");
+    const currentQuestion = questions[currentQuestionIndex];
+    const optionButtons = document.querySelectorAll(".option-button");
 
-    optionsButtons.forEach((button) => {
+    optionButtons.forEach((button) => {
       button.classList.remove("selected");
-      if (button.dataset.value === currentQuestions.correctAnswer) {
+      if (button.dataset.value === currentQuestion.correctAnswer) {
         button.classList.add("correct");
       } else if (button.dataset.value === selectedOption) {
         button.classList.add("wrong");
       }
-      button.style.cursor = "default";
+      const clone = button.cloneNode(true);
+      button.parentNode.replaceChild(clone, button);
+      clone.style.cursor = "default";
     });
-      
+
+    if (selectedOption === currentQuestion.correctAnswer) {
+      score++;
+      speechTextElement.textContent = "Great job! That's correct.";
+    } else {
+      speechTextElement.textContent = `Oops! The correct answer was "${currentQuestion.correctAnswer}".`;
+    }
+
+    continueButton.textContent = "Next Questions...";
+    continueButton.disabled = true;
+
+    setTimeout(() => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        displayQuestion();
+      } else {
+        displayResults();
+      }
+    }, autoAdvanceDelay);
   }
+
+  function goToNextQuestion() {
+    if (!isAnswered) {
+      checkAnswer();
+      return;
+    }
+
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      displayQuestion();
+    } else {
+      displayResults();
+    }
+  }
+
+  function updateProgressBar() {
+    const totalQuestions = questions.length;
+    const progress = (currentQuestionIndex / totalQuestions) * 100;
+    progressBar.style.width = `${progress}%`;
+  }
+
+  function displayResults() {
+    questionTextElement.textContent = "Quiz Complete!";
+    optionsContainer.innerHTML = `
+            <p style="text-align: center; font-size: 1.3em; margin-bottom: 15px;">You have finished all questions.</p>
+            <p style="text-align: center; font-size: 1.5em; font-weight: bold; color: var(--primary-blue);">Your Score: ${score} / ${questions.length}</p>
+            <p style="text-align: center; font-size: 1.2em; margin-top: 15px;">Good job!</p>
+        `;
+    speechTextElement.textContent = "You did great!";
+    updateProgressBar();
+
+    continueButton.style.display = "none";
+
+    const resultButtonsContainer = document.createElement("div");
+    resultButtonsContainer.id = "result-buttons-container";
+    resultButtonsContainer.style.display = "flex";
+    resultButtonsContainer.style.flexDirection = "column";
+    resultButtonsContainer.style.gap = "15px";
+    resultButtonsContainer.style.width = "100%";
+    resultButtonsContainer.style.maxWidth = "300px";
+
+    const restartButton = document.createElement("button");
+    restartButton.textContent = "RESTART QUIZ";
+    restartButton.classList.add("continue-button");
+    restartButton.onclick = () => {
+      currentQuestionIndex = 0;
+      score = 0;
+      resultButtonsContainer.remove();
+      displayQuestion();
+    };
+    resultButtonsContainer.appendChild(restartButton);
+
+    const quitButton = document.createElement("button");
+    quitButton.textContent = "QUIT";
+    quitButton.classList.add("continue-button");
+    quitButton.style.backgroundColor = "var(--dark-grey)";
+    quitButton.style.marginTop = "0";
+
+    quitButton.onclick = () => {
+      window.location.href = "/index.html";
+    };
+    resultButtonsContainer.appendChild(quitButton);
+
+    document
+      .querySelector(".quiz-container")
+      .appendChild(resultButtonsContainer);
+  }
+
+  continueButton.addEventListener("click", goToNextQuestion);
+
   displayQuestion();
 });
