@@ -1,5 +1,5 @@
 // Welcome Page
 function welcomeButton() {
-  window.location.href = "/quiz.html";
+  window.location.href = "/menu.html";
   console.info("sukses");
 }
