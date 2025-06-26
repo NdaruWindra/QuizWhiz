@@ -96,6 +96,7 @@
   .container-menu {
     overflow-x: auto;
     height: 100%;
+    margin: 5%;
   }
   .container-menuContent {
     width: 100%;
