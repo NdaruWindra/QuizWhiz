@@ -91,3 +91,20 @@
   cursor: not-allowed;
   color: #a0a0a0;
 }
+
+@media screen and (max-width: 768px) {
+  .container-menuContent {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    gap: 25px;
+  }
+
+  .container-menuQuiz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+}
