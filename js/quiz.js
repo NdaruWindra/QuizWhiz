@@ -128,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     continueButton.style.display = "none";
     bodyElement.style.height = "80vh";
+    bodyElement.style.overflow = "hidden";
 
     const resultButtonsContainer = document.createElement("div");
     resultButtonsContainer.id = "result-buttons-container";
