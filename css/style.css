@@ -57,3 +57,25 @@
   transform: scale(1.2);
 }
 /* End Welcome Page */
+
+@media screen and (max-width: 768px) {
+  .container-contentWelcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .img-welcome {
+    width: 80%;
+  }
+
+  .logo {
+    width: 50%;
+  }
+
+  .welcome-button {
+    width: 70%;
+    height: 30%;
+  }
+}
