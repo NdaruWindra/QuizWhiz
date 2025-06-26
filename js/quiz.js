@@ -3,13 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectedOption = null;
   let isAnswered = false;
   let score = 0;
-  const autoAdvanceDelay = 2000;
+  const autoAdvanceDelay = 1000;
 
   const questionTextElement = document.getElementById("question-text");
   const optionsContainer = document.getElementById("options-container");
   const continueButton = document.getElementById("continue-button");
   const progressBar = document.querySelector(".progress-bar");
   const speechTextElement = document.getElementById("speech-text");
+  const bodyElement = document.body;
 
   function displayQuestion() {
     if (currentQuestionIndex >= questions.length) {
@@ -126,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProgressBar();
 
     continueButton.style.display = "none";
+    bodyElement.style.height = "80vh";
 
     const resultButtonsContainer = document.createElement("div");
     resultButtonsContainer.id = "result-buttons-container";
