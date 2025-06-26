@@ -1,4 +1,4 @@
-const mathQuestions = [
+const questions = [
   {
     question: "What is the value of Pi (π) to two decimal places?",
     options: ["3.10", "3.14", "3.41", "3.04"],

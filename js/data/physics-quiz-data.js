@@ -1,4 +1,4 @@
-const physicsQuestions = [
+const questions = [
   {
     question:
       "What is the force that pulls objects towards the center of the Earth?",

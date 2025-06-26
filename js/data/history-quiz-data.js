@@ -1,4 +1,4 @@
-const historyQuestions = [
+const questions = [
   {
     question: "Who was the first President of the United States?",
     options: [
