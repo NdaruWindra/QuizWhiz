@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const continueButton = document.getElementById("continue-button");
   const progressBar = document.querySelector(".progress-bar");
   const speechTextElement = document.getElementById("speech-text");
-  const bodyElement = document.body;
 
   function displayQuestion() {
     if (currentQuestionIndex >= questions.length) {
@@ -116,6 +115,24 @@ document.addEventListener("DOMContentLoaded", () => {
     progressBar.style.width = `${progress}%`;
   }
 
+  function addNewCharacter() {
+    const imgDuo = document.getElementById("duo-img");
+    const containerImg = document.getElementById("duo-character");
+
+    const newImg = document.createElement("img");
+    newImg.src = "/assets/img-results.png";
+    newImg.alt = "imgresults";
+    newImg.style.width = "80px";
+    newImg.style.marginRight = "10px";
+    newImg.style.height = "auto";
+
+    if (imgDuo) {
+      imgDuo.remove();
+    }
+
+    containerImg.prepend(newImg);
+  }
+
   function displayResults() {
     questionTextElement.textContent = "Quiz Complete!";
     optionsContainer.innerHTML = `
@@ -126,8 +143,10 @@ document.addEventListener("DOMContentLoaded", () => {
     speechTextElement.textContent = "You did great!";
     updateProgressBar();
 
+    addNewCharacter();
+
     continueButton.style.display = "none";
-    
+
     const resultButtonsContainer = document.createElement("div");
     resultButtonsContainer.id = "result-buttons-container";
     resultButtonsContainer.style.display = "flex";
@@ -150,7 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const quitButton = document.createElement("button");
     quitButton.textContent = "QUIT";
     quitButton.classList.add("continue-button");
-    quitButton.style.backgroundColor = "var(--dark-grey)";
+    quitButton.style.border = "3px solid #cccccc";
+    quitButton.style.backgroundColor = "white";
+    quitButton.style.color = "black";
     quitButton.style.marginTop = "0";
 
     quitButton.onclick = () => {

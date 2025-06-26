@@ -79,7 +79,8 @@ body {
 /* Karakter Duo dan Speech Bubble */
 .duo-character {
   display: flex;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 25px;
 }
 
