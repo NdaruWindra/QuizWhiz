@@ -129,6 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
     continueButton.style.display = "none";
     bodyElement.style.height = "80vh";
     bodyElement.style.overflow = "hidden";
+    bodyElement.style.display = "flex";
+    bodyElement.style.flexDirection = "column";
+    bodyElement.style.justifyContent = "center";
+    bodyElement.style.alignItems = "center";
 
     const resultButtonsContainer = document.createElement("div");
     resultButtonsContainer.id = "result-buttons-container";
